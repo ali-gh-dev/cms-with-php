@@ -1,5 +1,12 @@
 <?php
+session_start();
 require "includes/init.php";
+
+if (!Auth::is_logged_in()) {
+    echo "you don't allow to edit article.<br><br>login first !!!<br><br>";
+    echo "<button class='btn'><a href='login.php'>Login</a></button>";
+    die();
+}
 
 $database = new Database();
 $db = $database->connect();
@@ -9,12 +16,18 @@ $id = $_GET['id'];
 $articleData = $article->read_single($id)->fetch(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    if ($article->update($id, $title, $content)) {
-        header('Location: index.php');
+    if (Auth::is_logged_in()) {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        if ($article->update($id, $title, $content)) {
+            header('Location: index.php');
+        }
+    }else {
+        die("you don't allow to edit articles.<br>login first !!!");
     }
+    
 }
+
 ?>
 
 <!DOCTYPE html>
