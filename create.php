@@ -1,6 +1,5 @@
 <?php
-include_once './classes/Database.php';
-include_once './classes/Article.php';
+require "includes/init.php";
 
 $database = new Database();
 $db = $database->connect();
