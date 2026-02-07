@@ -1,38 +1,22 @@
 <?php
 
-session_start();
+require "includes/init.php";
+require "includes/connection.php";
+
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
-    require "includes/connection.php";
-
     $user = $_POST['username'];
     $pass = $_POST['password'];
-    $query = "select * from user where username = :u";
-    $result = $conn->prepare($query);
-    $result->bindParam(':u', $user);
-    $result->execute();
-    $row = $result->fetch();
+    $auth_result = Auth::auth_attempt($conn, $user, $pass);
 
-
-    if ($row) {
-        // function for hashing password => password_hash('test-password', PASSWORD_DEFAULT)
-
-        // comparison between hashed password in database & entered password
-        // $pass => entered password
-        // $row['password'] => hashed password in database
-        $password_is_true = password_verify($pass, $row['password']);
-
-        if ($password_is_true) {
-            $_SESSION['is_logged_in'] = true;
-            echo "======== you logged in successfully !  ========";
-        }else {
-            echo "======== oops. wrong data ! ========";
-        }
-        
+    if ($auth_result) {
+        Auth::login();
     }else{
-        echo "======== oops. wrong data ! ========";
+        echo "oops. wrong data ...";
     }
+
+    die();
 
 }
 

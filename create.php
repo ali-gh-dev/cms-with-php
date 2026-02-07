@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require "includes/init.php";
 
 if (!Auth::is_logged_in()) {

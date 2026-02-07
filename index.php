@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require "includes/init.php";
 
 
@@ -18,6 +18,16 @@ $articles = $article->read();
     <title>مدیریت مقالات</title>
 </head>
 <body>
+
+    <div>
+        <?php
+        if (isset($_SESSION['is_logged_in'])) {
+            echo "<button class='btn'><a href='logout.php'>Logout</a></button>";
+        }else{
+            echo "<button class='btn'><a href='login.php'>Login</a></button>";
+        }
+        ?>
+    </div>
 
     <h1>لیست مقالات</h1>
 
