@@ -21,7 +21,7 @@ $articles = $article->read();
 
     <div>
         <?php
-        if (isset($_SESSION['is_logged_in'])) {
+        if (Auth::is_logged_in()) {
             echo "<button class='btn'><a href='logout.php'>Logout</a></button>";
         }else{
             echo "<button class='btn'><a href='login.php'>Login</a></button>";
