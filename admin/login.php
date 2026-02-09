@@ -1,7 +1,7 @@
 <?php
 
-require "includes/init.php";
-require "includes/connection.php";
+require "../includes/init.php";
+require "../includes/connection.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){

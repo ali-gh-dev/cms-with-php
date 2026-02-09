@@ -1,0 +1,31 @@
+body {
+    background-color: rgb(173, 173, 173);
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    text-align: center;
+    margin: 2rem auto;
+    color: rgb(190, 126, 7);
+}
+
+.btn {
+    background: rgb(237, 159, 16);
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+    padding: 0.75rem;
+    margin: 0.5rem;
+    border-radius: 50px;
+    border: none;
+    text-align: center;
+    transition: all ease-in-out 0.25s;
+}
+
+.btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+
+}

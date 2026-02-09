@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 spl_autoload_register(function($class){
-    require "classes/" . $class . ".php";
+    require __DIR__ . "/../classes/" . $class . ".php";
 });
 
 

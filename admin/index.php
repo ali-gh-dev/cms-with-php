@@ -1,6 +1,12 @@
 <?php
 
-require "includes/init.php";
+require "../includes/init.php";
+
+if (!Auth::is_logged_in()) {
+    echo "you are not allowed to be here.<br><br>login first !!!<br><br>";
+    echo "<button class='btn'><a href='login.php'>Login</a></button>";
+    die();
+}
 
 
 $database = new Database();
@@ -16,11 +22,10 @@ $articles = $article->read();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>مدیریت مقالات</title>
+    <title>پنل ادمین</title>
 </head>
 <body>
 
-    <!-- login / logout button -->
     <div>
         <?php
         if (Auth::is_logged_in()) {
@@ -33,20 +38,27 @@ $articles = $article->read();
 
     <h1>لیست مقالات</h1>
 
+    <a href="create.php">ایجاد مقاله جدید</a>
+    <br>
+    <br>
+
     <table border="1">
         <thead>
             <tr>
                 <th>عنوان</th>
-                <th>متن مقاله</th>
                 <th>تاریخ ایجاد</th>
+                <th>عملیات</th>
             </tr>
         </thead>
         <tbody>
             <?php while ($row = $articles->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['title']); ?></td>
-                    <td><?php echo htmlspecialchars($row['content']); ?></td>
                     <td><?php echo $row['created_at']; ?></td>
+                    <td>
+                        <a href="edit.php?id=<?php echo $row['id']; ?>">ویرایش</a>
+                        <a href="delete.php?id=<?php echo $row['id']; ?>">حذف</a>
+                    </td>
                 </tr>
             <?php endwhile; ?>
         </tbody>
