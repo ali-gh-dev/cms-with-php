@@ -10,7 +10,7 @@ $article = new Article($db);
 // $articles = $article->read();
 
 
-$pagination = new Paginator($_GET['page'] ?? 1, 5, 13);
+$pagination = new Paginator($_GET['page'] ?? 1, 5, $article->get_count()['total']);
 var_dump($pagination);
 
 // articles of one page

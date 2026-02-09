@@ -7,6 +7,15 @@ class Article {
         $this->conn = $db;
     }
 
+    // تعداد مقالات
+    public function get_count() {
+        $query = "SELECT count(*) as total FROM " . $this->table ;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); 
+        return $result;
+    }
+
     // ایجاد مقاله
     public function create($title, $content) {
         $query = "INSERT INTO " . $this->table . " (title, content) VALUES (:title, :content)";
@@ -29,7 +38,7 @@ class Article {
 
     // دریافت مقالات یک صفحه
     public function get_page($limit, $offset) {
-        $query = "SELECT * FROM " . $this->table . " ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
+        $query = "SELECT * FROM " . $this->table . " ORDER BY id LIMIT $limit OFFSET $offset";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
