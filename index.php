@@ -63,5 +63,32 @@ $articles = $article->get_page($pagination->limit, $pagination->offset);
         </tbody>
     </table>
 
+    <br><br>
+
+    <footer>
+        <ul>
+            <li>
+                <?php
+                    if (!$pagination->previous) {
+                        echo "previous";
+                    }else {
+                        echo "<a href=?page=" . $pagination->previous . ">Previous</a>";
+                    }
+                 ?>
+            </li>
+            
+
+            <li>
+                <?php
+                    if (!$pagination->next) {
+                        echo "next";
+                    }else {
+                        echo "<a href=?page=" . $pagination->next . ">Next</a>";
+                    }
+                 ?>
+            </li>
+        </ul>
+    </footer>
+
 </body>
 </html>
