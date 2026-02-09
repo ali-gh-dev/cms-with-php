@@ -7,7 +7,18 @@ $database = new Database();
 $db = $database->connect();
 $article = new Article($db);
 
-$articles = $article->read();
+// $articles = $article->read();
+
+
+$pagination = new Paginator($_GET['page'] ?? 1, 5, 13);
+var_dump($pagination);
+
+// articles of one page
+$articles = $article->get_page($pagination->limit, $pagination->offset);
+
+
+
+
 ?>
 
 <!DOCTYPE html>

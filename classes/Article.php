@@ -27,6 +27,14 @@ class Article {
         return $stmt;
     }
 
+    // دریافت مقالات یک صفحه
+    public function get_page($limit, $offset) {
+        $query = "SELECT * FROM " . $this->table . " ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
     // دریافت یک مقاله بر اساس ID
     public function read_single($id) {
         $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
