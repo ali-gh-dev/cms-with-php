@@ -20,7 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $title = $_POST['title'];
         $content = $_POST['content'];
         if ($article->update($id, $title, $content)) {
-            header('Location: index.php');
+            // header('Location: index.php');
+            Url::redirect('/');
         }
     }else {
         die("you don't allow to edit articles.<br>login first !!!");

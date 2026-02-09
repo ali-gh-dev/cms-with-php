@@ -14,6 +14,7 @@ $article = new Article($db);
 
 $id = $_GET['id'];
 if ($article->delete($id)) {
-    header('Location: index.php');
+    // header('Location: index.php');
+    Url::redirect('/');
 }
 ?>

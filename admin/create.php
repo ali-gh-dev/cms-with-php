@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = $_POST['title'];
     $content = $_POST['content'];
     if ($article->create($title, $content)) {
-        header('Location: index.php');
+        // header('Location: index.php');
+        Url::redirect('/');
     }
 }
 ?>
