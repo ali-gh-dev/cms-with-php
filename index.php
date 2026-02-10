@@ -7,11 +7,12 @@ $database = new Database();
 $db = $database->connect();
 $article = new Article($db);
 
+// all articles
 // $articles = $article->read();
 
 
 $pagination = new Paginator($_GET['page'] ?? 1, 5, $article->get_count()['total']);
-var_dump($pagination);
+
 
 // articles of one page
 $articles = $article->get_page($pagination->limit, $pagination->offset);
@@ -47,16 +48,18 @@ $articles = $article->get_page($pagination->limit, $pagination->offset);
     <table border="1">
         <thead>
             <tr>
+                <th>id</th>
                 <th>عنوان</th>
-                <th>متن مقاله</th>
                 <th>تاریخ ایجاد</th>
             </tr>
         </thead>
         <tbody>
             <?php while ($row = $articles->fetch(PDO::FETCH_ASSOC)): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['title']); ?></td>
-                    <td><?php echo htmlspecialchars($row['content']); ?></td>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><a href="view.php?id=<?php echo $row['id']; ?>">
+                        <?php echo htmlspecialchars($row['title']); ?>
+                    </a></td>
                     <td><?php echo $row['created_at']; ?></td>
                 </tr>
             <?php endwhile; ?>
